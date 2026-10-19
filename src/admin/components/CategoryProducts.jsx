@@ -1,0 +1,14 @@
+import {useEffect,useMemo,useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Modal,Notice,Toolbar,Stats,Empty} from './ManagementUI';
+import {getProductsByCategory} from '../services/adminService';
+import CategoryImage from '../../components/CategoryImage';
+import {getProductPrice,money} from '../../utils/commerce';
+import {categoryImageURL,foldCategory} from '../../utils/categories';
+export default function CategoryProducts({category,onClose}){
+ const [products,setProducts]=useState([]),[query,setQuery]=useState(''),[status,setStatus]=useState('all'),[loading,setLoading]=useState(true),[error,setError]=useState(''),[revision,setRevision]=useState(0);
+ useEffect(()=>{let live=true;setLoading(true);setError('');getProductsByCategory(category.id).then(rows=>{if(live)setProducts(rows);}).catch(e=>{if(live)setError(e.message||'Não foi possível carregar os produtos.');}).finally(()=>{if(live)setLoading(false);});return()=>{live=false;};},[category.id,revision]);
+ const filtered=useMemo(()=>products.filter(p=>(status==='all'||(status==='active'?p.active!==false:p.active===false))&&foldCategory([p.name,p.sku,p.barcode].join(' ')).includes(foldCategory(query))),[products,query,status]);
+ const base='/admin/products?category='+encodeURIComponent(category.id);
+ return <Modal title={'Produtos · '+category.name} onClose={onClose}><div className="categoryExplorer"><div className="categoryExplorerIntro"><CategoryImage category={category}/><p>Explore os produtos desta categoria. Abra a edição para alterar preço, desconto, imagem, estoque e categoria.</p></div><Stats items={[["Produtos",products.length],["Ativos",products.filter(p=>p.active!==false).length],["Sem estoque",products.filter(p=>Number(p.stock||0)<=0).length]]}/><div className="ux-actions"><Link className="ux-button primary" to={base}>Gerenciar esta categoria</Link><Link className="ux-button" to={base+'&new=1'}>Adicionar produto</Link></div><Toolbar query={query} setQuery={setQuery} placeholder="Buscar produto nesta categoria" reload={()=>setRevision(n=>n+1)} loading={loading}><select aria-label="Status dos produtos" value={status} onChange={e=>setStatus(e.target.value)}><option value="all">Todos os status</option><option value="active">Ativos</option><option value="inactive">Inativos</option></select></Toolbar><Notice>{error}</Notice>{loading?<Empty loading/>:!filtered.length?<Empty text="Nenhum produto encontrado nesta categoria."/>:<div className="categoryExplorerList">{filtered.map(p=><article key={p.id}><CategoryImage category={{name:p.name,image_url:p.image_url||categoryImageURL(category)}}/><div><strong>{p.name}</strong><small>{p.sku||p.barcode||'Sem código'} · {p.active!==false?'Ativo':'Inativo'}</small><small>Estoque: {p.stock||0} {p.unit||'UN'}</small></div><b>{money(getProductPrice(p))}</b><Link className="ux-button" aria-label={'Editar '+p.name} to={base+'&edit='+encodeURIComponent(p.id)}>Editar</Link></article>)}</div>}</div></Modal>;
+}

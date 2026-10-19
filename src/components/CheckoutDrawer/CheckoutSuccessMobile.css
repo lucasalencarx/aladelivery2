@@ -1,0 +1,135 @@
+/* =========================================================
+   SUCESSO DO PEDIDO - MOBILE FIXO
+========================================================= */
+
+.checkoutTrackOrderButton {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #171717;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 850;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.checkoutTrackOrderButton > span {
+  flex: 1;
+  text-align: left;
+}
+
+.checkoutTrackOrderButton:active {
+  transform: scale(0.985);
+}
+
+.checkoutTrackOrderButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   SUCCESS MODE
+========================================================= */
+
+.checkoutOverlay.checkoutSuccessMode {
+  z-index: 99999;
+}
+
+.checkoutDrawer.checkoutDrawerSuccess {
+  transform: none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .checkoutOverlay.checkoutSuccessMode {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+  }
+
+  .checkoutOverlay.checkoutSuccessMode .checkoutBackdrop {
+    position: fixed !important;
+    inset: 0 !important;
+  }
+
+  .checkoutOverlay.checkoutSuccessMode .checkoutDrawer,
+  .checkoutDrawer.checkoutDrawerSuccess {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    max-width: none !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    animation: none !important;
+    overflow: hidden !important;
+  }
+
+  .checkoutOverlay.checkoutSuccessMode .checkoutHeader {
+    position: relative;
+    z-index: 3;
+    flex: 0 0 auto;
+  }
+
+  .checkoutOverlay.checkoutSuccessMode .checkoutContent {
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-bottom:
+      calc(
+        24px +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+  .checkoutOverlay.checkoutSuccessMode .checkoutStepAnimation {
+    min-height: 100%;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .checkoutOverlay.checkoutSuccessMode .checkoutPixScreen {
+    min-height: 100%;
+  }
+
+  .checkoutOverlay.checkoutSuccessMode .checkoutOrderSuccess {
+    min-height: 100%;
+    padding-bottom:
+      calc(
+        20px +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+  .checkoutTrackOrderButton {
+    min-height: 50px;
+    border-radius: 11px;
+  }
+}

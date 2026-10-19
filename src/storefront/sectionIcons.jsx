@@ -1,0 +1,3 @@
+import { Sparkles, Beer, CupSoda, Snowflake, Wine, Flame, ShoppingBasket } from 'lucide-react';
+export function sectionIcon(name){const text=String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();if(/recomend|destaque|oferta/.test(text))return Sparkles;if(/cerveja|beer/.test(text))return Beer;if(/sem alcool|refrigerante|suco|agua/.test(text))return CupSoda;if(/gelo/.test(text))return Snowflake;if(/vinho|destilado/.test(text))return Wine;if(/churrasco|petisco/.test(text))return Flame;return ShoppingBasket;}
+export function isChilled(product){return /cerveja|beer|refrigerante|soft.drink|energetic|energy.drink|agua|water|suco/.test(String(product.category_name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase());}

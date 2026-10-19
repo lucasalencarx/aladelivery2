@@ -1,0 +1,177 @@
+/* =====================================================
+   ROOT
+===================================================== */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+
+  background: #ffffff;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+.store-main {
+  width: 100%;
+
+  max-width: 100%;
+
+  padding-top: 200px;
+
+  padding-bottom: 100px;
+
+  margin: 0;
+
+  overflow-x: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+  width: 80%;
+
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+
+/* =====================================================
+   FILHOS DO CONTAINER
+===================================================== */
+
+.container > * {
+  width: 100%;
+
+  max-width: 100%;
+
+  box-sizing: border-box;
+
+  margin-left: 0;
+
+  margin-right: 0;
+}
+
+
+/* =====================================================
+   NOTEBOOK
+===================================================== */
+
+@media (max-width: 1200px) {
+
+  .container {
+    width: 92%;
+
+    max-width: none;
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .container {
+    width: calc(100% - 32px);
+
+    max-width: 100%;
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .store-main {
+    padding-top: 205px;
+  }
+
+
+  .container {
+    width: calc(100% - 24px);
+
+    max-width: 100%;
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+}
+
+
+/* =====================================================
+   CELULAR PEQUENO
+===================================================== */
+
+@media (max-width: 390px) {
+
+  .store-main {
+    padding-top: 195px;
+  }
+
+
+  .container {
+    width: calc(100% - 18px);
+
+    max-width: 100%;
+
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+}

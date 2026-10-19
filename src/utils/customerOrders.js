@@ -1,0 +1,10 @@
+export const activeOrder=o=>!['delivered','cancelled','canceled','cancelado','entregue','completed','finalizado','concluido','concluído'].includes(String(o.order_status||'').toLowerCase());
+export function privateOrderProofs(){const out=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k?.startsWith('ala_order_'))continue;try{const c=JSON.parse(localStorage.getItem(k));if(c?.id&&c?.token)out.push(c);}catch{}}}catch{}return out;}
+export function mergeOrders(...lists){const byId=new Map();for(const o of lists.flat()){const key=String(o.id),prior=byId.get(key);if(!prior||(Date.parse(o.updated_at||o.created_at)||0)>=(Date.parse(prior.updated_at||prior.created_at)||0))byId.set(key,{...prior,...o,access_token:o.access_token||prior?.access_token});}return [...byId.values()].sort((a,b)=>Date.parse(b.created_at)-Date.parse(a.created_at));}
+export function periodOrders(orders,period){if(period==='all')return orders;const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Campo_Grande',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const d=new Date(today+'T12:00:00Z');if(period!=='today'){const day=d.getUTCDate();d.setUTCDate(1);d.setUTCMonth(d.getUTCMonth()-({'1m':1,'3m':3,'1y':12}[period]||1));const last=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate();d.setUTCDate(Math.min(day,last));}const min=d.toISOString().slice(0,10);return orders.filter(o=>new Intl.DateTimeFormat('en-CA',{timeZone:'America/Campo_Grande',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(o.created_at))>=min);}
+export function cachedPrivateOrders(){return privateOrderProofs().filter(p=>p.snapshot?.id===p.id).map(p=>({...p.snapshot,access_token:p.token}));}
+export async function refreshOrdersProgressively(proofs,load,onOrder,{concurrency=6,alive=()=>true}={}){
+ let index=0,failed=0;
+ async function worker(){while(alive()&&index<proofs.length){const proof=proofs[index++];try{const order=await load(proof);if(alive())onOrder(order,proof);}catch{failed++;}}}
+ await Promise.all(Array.from({length:Math.min(concurrency,proofs.length)},worker));return {failed};
+}

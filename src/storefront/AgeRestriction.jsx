@@ -1,0 +1,4 @@
+import { Link } from 'react-router-dom';
+import { ShieldCheck, ExternalLink } from 'lucide-react';
+import logo from '../assets/images/logomarca.png';
+export default function AgeRestriction(){return <div className="sf-age-page sf-restriction-page"><main className="sf-restriction-panel"><img className="sf-age-logo" src={logo} alt="Ala Delivery"/><span className="sf-age-badge"><ShieldCheck size={22}/></span><h1>Acesso restrito</h1><p>A venda de bebidas alcoólicas é destinada a maiores de 18 anos.</p><div className="sf-law-note"><strong>Proteção de crianças e adolescentes</strong><p>O artigo 243 do Estatuto da Criança e do Adolescente proíbe vender ou fornecer bebidas alcoólicas a crianças e adolescentes, mesmo gratuitamente.</p></div><a className="sf-primary" href="https://www.planalto.gov.br/ccivil_03/leis/l8069.htm#art243">Consultar lei oficial <ExternalLink size={15}/></a><Link className="sf-secondary" to="/">Voltar à confirmação</Link></main></div>;}

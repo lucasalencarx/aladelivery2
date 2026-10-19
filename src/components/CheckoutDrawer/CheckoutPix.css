@@ -1,0 +1,988 @@
+/* =========================================================
+   CHECKOUT PIX + SUCESSO + RASTREAMENTO
+   Arquivo único
+========================================================= */
+
+
+/* =========================================================
+   PIX - CONTAINER
+========================================================= */
+
+.checkoutPixScreen {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.checkoutPixHeader {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 15px;
+}
+
+.checkoutPixHeaderIcon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #fff4c7;
+  color: #806000;
+}
+
+.checkoutPixHeader h3 {
+  margin: 0;
+  color: #202020;
+  font-size: 16px;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.checkoutPixHeader p {
+  margin: 2px 0 0;
+  color: #858585;
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   QR CODE
+========================================================= */
+
+.checkoutPixQrCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 17px 14px 14px;
+  border: 1px solid #ececec;
+  border-radius: 13px;
+  background: #ffffff;
+}
+
+.checkoutPixQrImage {
+  width: min(205px, 68vw);
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: contain;
+}
+
+.checkoutPixValue {
+  margin-top: 11px;
+  color: #1d1d1d;
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.checkoutPixTimer {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 7px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #f4f4f4;
+  color: #686868;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.checkoutPixTimer strong {
+  color: #373737;
+  font-weight: 850;
+}
+
+.checkoutPixTimer.expired {
+  background: #fff0f0;
+  color: #b83b3b;
+}
+
+.checkoutPixTimer.expired strong {
+  color: #b83b3b;
+}
+
+
+/* =========================================================
+   PIX COPIA E COLA - SIMPLES
+========================================================= */
+
+.checkoutPixCopyArea {
+  margin-top: 12px;
+  padding: 10px 11px;
+  border: 1px solid #e9e9e9;
+  border-radius: 11px;
+  background: #fafafa;
+}
+
+.checkoutPixCopyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.checkoutPixCopyArea label {
+  color: #6c6c6c;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.checkoutPixCode {
+  width: 100%;
+  max-height: 46px;
+  overflow: hidden;
+  color: #737373;
+  font-size: 9.5px;
+  line-height: 1.45;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  user-select: all;
+  -webkit-user-select: all;
+}
+
+.checkoutPixCopyButton {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding: 0 9px;
+  border: 1px solid #dadada;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #343434;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.14s ease,
+    border-color 0.14s ease,
+    transform 0.14s ease;
+}
+
+.checkoutPixCopyButton:hover {
+  background: #f2f2f2;
+  border-color: #cdcdcd;
+}
+
+.checkoutPixCopyButton:active {
+  transform: scale(0.97);
+}
+
+.checkoutPixCopyButton.copied {
+  border-color: #bfe1c8;
+  background: #f2faf4;
+  color: #277440;
+}
+
+.checkoutPixCopyButton:disabled {
+  opacity: 0.42;
+  cursor: default;
+  transform: none;
+}
+
+
+/* =========================================================
+   AGUARDANDO PIX
+========================================================= */
+
+.checkoutPixWaiting {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: #f7f7f7;
+  color: #727272;
+  font-size: 10px;
+  font-weight: 650;
+  text-align: center;
+}
+
+.checkoutPixSpinner {
+  flex-shrink: 0;
+  animation: checkoutPixSpin 0.85s linear infinite;
+}
+
+
+/* =========================================================
+   PIX EXPIRADO
+========================================================= */
+
+.checkoutPixExpired {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 11px;
+  border: 1px solid #eed5d5;
+  border-radius: 10px;
+  background: #fffafa;
+}
+
+.checkoutPixExpiredText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.checkoutPixExpiredText strong {
+  color: #983737;
+  font-size: 10.5px;
+  font-weight: 850;
+}
+
+.checkoutPixExpiredText span {
+  color: #8c7272;
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.checkoutPixRestartButton {
+  min-height: 34px;
+  flex-shrink: 0;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 8px;
+  background: #252525;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 850;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.14s ease,
+    transform 0.14s ease;
+}
+
+.checkoutPixRestartButton:hover {
+  background: #111111;
+}
+
+.checkoutPixRestartButton:active {
+  transform: scale(0.97);
+}
+
+
+/* =========================================================
+   CPF / ERRO
+========================================================= */
+
+.checkoutPixPayer {
+  margin-top: 11px;
+}
+
+.checkoutPixDocumentHint {
+  display: block;
+  margin-top: 5px;
+  color: #8b8b8b;
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.checkoutPixError {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff0f0;
+  color: #a23a3a;
+  font-size: 9.5px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   CONFIRMANDO
+========================================================= */
+
+.checkoutPixConfirming {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 18px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.checkoutPixConfirmingSpinner {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: #fff4c7;
+  color: #866500;
+}
+
+.checkoutPixConfirmingSpinner svg {
+  animation: checkoutPixSpin 0.85s linear infinite;
+}
+
+.checkoutPixConfirmingBadge {
+  display: inline-flex;
+  margin-bottom: 7px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #f2f8f4;
+  color: #34734a;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.045em;
+}
+
+.checkoutPixConfirming h3 {
+  margin: 0;
+  color: #202020;
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.checkoutPixConfirming p {
+  max-width: 330px;
+  margin: 7px 0 0;
+  color: #828282;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.checkoutPixConfirmingDots {
+  display: flex;
+  gap: 5px;
+  margin-top: 13px;
+}
+
+.checkoutPixConfirmingDots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #b8b8b8;
+  animation: checkoutPixDot 1s ease-in-out infinite;
+}
+
+.checkoutPixConfirmingDots span:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.checkoutPixConfirmingDots span:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+
+/* =========================================================
+   ANIMAÇÕES PIX
+========================================================= */
+
+@keyframes checkoutPixSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes checkoutPixDot {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+
+/* =========================================================
+   SUCESSO / PEDIDO / RASTREAMENTO
+   Mantido no MESMO CSS do PIX.
+========================================================= */
+
+/* =========================================================
+   PAGAMENTO EFETUADO / PEDIDO CONFIRMADO
+========================================================= */
+
+.checkoutOrderSuccess {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.checkoutOrderSuccessHero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px 5px;
+  text-align: center;
+}
+
+.checkoutOrderSuccessIcon {
+  width: 78px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: #ecfdf3;
+  color: #15803d;
+}
+
+.checkoutOrderSuccessBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: #ecfdf3;
+  color: #15803d;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.checkoutOrderSuccessHero h3 {
+  margin: 7px 0 4px;
+  color: #171717;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.checkoutOrderSuccessHero p {
+  max-width: 360px;
+  margin: 0;
+  color: #777777;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.checkoutOrderProtocol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 13px;
+  border: 1px dashed #e1b324;
+  border-radius: 12px;
+  background: #fffdf6;
+  text-align: center;
+}
+
+.checkoutOrderProtocol span {
+  color: #7e7e7e;
+  font-size: 9px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.checkoutOrderProtocol strong {
+  color: #8b6900;
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.checkoutOrderProtocol small {
+  color: #909090;
+  font-size: 9px;
+}
+
+.checkoutOrderTracking,
+.checkoutOrderDetails,
+.checkoutOrderProducts,
+.checkoutOrderDelivery {
+  padding: 12px;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.checkoutOrderBlockTitle {
+  margin-bottom: 9px;
+  color: #292929;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.checkoutOrderTimeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkoutOrderTimelineItem {
+  position: relative;
+  min-height: 54px;
+  display: flex;
+  gap: 10px;
+}
+
+.checkoutOrderTimelineItem:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 13px;
+  width: 2px;
+  height: calc(100% - 4px);
+  background: #e7e7e7;
+}
+
+.checkoutOrderTimelineItem.done:not(:last-child)::before {
+  background: #9bdcb0;
+}
+
+.checkoutOrderTimelineMarker {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f1f1f1;
+  color: #909090;
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.checkoutOrderTimelineItem.done .checkoutOrderTimelineMarker {
+  background: #e8f8ee;
+  color: #15803d;
+}
+
+.checkoutOrderTimelineItem.current .checkoutOrderTimelineMarker {
+  background: #fff3c4;
+  color: #8b6900;
+}
+
+.checkoutOrderTimelineItem > div:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+}
+
+.checkoutOrderTimelineItem strong {
+  color: #363636;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.checkoutOrderTimelineItem span {
+  margin-top: 2px;
+  color: #929292;
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.checkoutOrderInfoRow {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.checkoutOrderInfoRow:last-child {
+  border-bottom: 0;
+}
+
+.checkoutOrderInfoRow span {
+  color: #858585;
+  font-size: 10px;
+}
+
+.checkoutOrderInfoRow strong {
+  color: #292929;
+  font-size: 11px;
+  text-align: right;
+}
+
+.checkoutOrderInfoRow.success strong {
+  color: #15803d;
+}
+
+.checkoutOrderInfoRow.total strong {
+  color: #171717;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.checkoutOrderProduct {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.checkoutOrderProduct:last-child {
+  border-bottom: 0;
+}
+
+.checkoutOrderProduct > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkoutOrderProduct > div strong {
+  overflow: hidden;
+  color: #303030;
+  font-size: 10.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.checkoutOrderProduct > div span {
+  margin-top: 2px;
+  color: #949494;
+  font-size: 9px;
+}
+
+.checkoutOrderProduct > strong {
+  flex-shrink: 0;
+  color: #252525;
+  font-size: 10.5px;
+}
+
+.checkoutOrderDeliveryContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.checkoutOrderDeliveryContent > svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #8b6900;
+}
+
+.checkoutOrderDeliveryContent > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkoutOrderDeliveryContent strong {
+  color: #292929;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.checkoutOrderDeliveryContent span,
+.checkoutOrderDeliveryContent small {
+  margin-top: 2px;
+  color: #858585;
+  font-size: 9.5px;
+  line-height: 1.4;
+}
+
+.checkoutOrderObservation {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 11px;
+  border-radius: 10px;
+  background: #f7f7f7;
+  color: #696969;
+}
+
+.checkoutOrderObservation > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkoutOrderObservation strong {
+  color: #424242;
+  font-size: 10px;
+}
+
+.checkoutOrderObservation span {
+  margin-top: 2px;
+  font-size: 9.5px;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .checkoutOrderSuccessHero h3 {
+    font-size: 18px;
+  }
+
+  .checkoutOrderProtocol strong {
+    font-size: 19px;
+  }
+}
+
+
+
+/* =========================================================
+   FAIXA PAGAMENTO CONFIRMADO
+========================================================= */
+
+.checkoutOrderPaidStrip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 11px;
+  border: 1px solid #d8ebde;
+  border-radius: 11px;
+  background: #f5fbf7;
+}
+
+.checkoutOrderPaidStripIcon {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: #e5f5ea;
+  color: #15803d;
+}
+
+.checkoutOrderPaidStrip > div:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.checkoutOrderPaidStrip strong {
+  color: #264331;
+  font-size: 10.5px;
+  font-weight: 850;
+}
+
+.checkoutOrderPaidStrip span {
+  color: #6a7f70;
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   BOTÃO RASTREAR ENTREGA
+========================================================= */
+
+.checkoutTrackOrderButton {
+  width: 100%;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 10px;
+  background: #e7e7e7;
+  color: #2f2f2f;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 850;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.14s ease,
+    transform 0.14s ease;
+}
+
+.checkoutTrackOrderButton span {
+  flex: 1;
+  text-align: left;
+}
+
+.checkoutTrackOrderButton:hover {
+  background: #111111;
+}
+
+.checkoutTrackOrderButton:active {
+  transform: scale(0.985);
+}
+
+
+/* =========================================================
+   BOTÃO FINALIZAR / VOLTAR À LOJA
+========================================================= */
+
+.checkoutFinishButton {
+  width: 100%;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #fbc02d;
+  color: #1c1c1c;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 850;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.checkoutFinishButton:hover {
+  filter: brightness(0.97);
+}
+
+
+/* =========================================================
+   MODO SUCESSO
+========================================================= */
+
+.checkoutOverlay.checkoutSuccessMode .checkoutDrawer {
+  overflow-y: auto;
+}
+
+.checkoutDrawerSuccess .checkoutHeader {
+  position: sticky;
+  top: 0;
+}
+
+.checkoutOverlay.checkoutSuccessMode .checkoutStepAnimation {
+  width: 100%;
+  transform: none;
+  animation: none;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .checkoutPixHeader {
+    margin-bottom: 12px;
+  }
+
+  .checkoutPixQrCard {
+    padding: 14px 12px 12px;
+  }
+
+  .checkoutPixQrImage {
+    width: min(185px, 61vw);
+  }
+
+  .checkoutPixValue {
+    font-size: 19px;
+  }
+
+  .checkoutPixExpired {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .checkoutPixRestartButton {
+    width: 100%;
+  }
+
+  .checkoutOrderSuccessHero {
+    padding-top: 10px;
+  }
+
+  .checkoutOrderSuccessIcon {
+    width: 68px;
+    height: 68px;
+  }
+
+  .checkoutOrderSuccessHero h3 {
+    font-size: 18px;
+  }
+
+  .checkoutOrderProtocol strong {
+    font-size: 19px;
+  }
+
+  .checkoutTrackOrderButton,
+  .checkoutFinishButton {
+    min-height: 48px;
+  }
+
+}
+
+@media (max-width: 390px) {
+
+  .checkoutPixQrImage {
+    width: min(170px, 59vw);
+  }
+
+  .checkoutPixCopyArea {
+    padding: 9px 10px;
+  }
+
+  .checkoutOrderSuccess {
+    gap: 10px;
+  }
+
+  .checkoutOrderSuccessHero h3 {
+    font-size: 17px;
+  }
+
+  .checkoutOrderProtocol {
+    padding: 11px;
+  }
+
+  .checkoutOrderProtocol strong {
+    font-size: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .checkoutPixSpinner,
+  .checkoutPixConfirmingSpinner svg,
+  .checkoutPixConfirmingDots span {
+    animation: none !important;
+  }
+
+  .checkoutPixCopyButton,
+  .checkoutPixRestartButton,
+  .checkoutTrackOrderButton {
+    transition: none !important;
+  }
+
+}
+
+textarea.checkoutPixCode { display:block; height:46px; padding:0; border:0; background:transparent; resize:none; border-radius:0; font-family:inherit; }

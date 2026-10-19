@@ -1,0 +1,1192 @@
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+  width: 100%;
+
+  position: fixed;
+
+  top: 32px;
+  left: 0;
+
+  z-index: 1000;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 20% -20%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.45) 30%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 85% 130%,
+      rgba(215, 220, 228, 0.22) 0%,
+      rgba(230, 233, 238, 0.10) 32%,
+      transparent 58%
+    ),
+    linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(249, 250, 252, 0.94) 38%,
+      rgba(241, 243, 246, 0.91) 72%,
+      rgba(255, 255, 255, 0.96) 100%
+    );
+
+  backdrop-filter:
+    blur(24px)
+    saturate(130%);
+
+  -webkit-backdrop-filter:
+    blur(24px)
+    saturate(130%);
+
+  border-bottom:
+    1px solid
+    rgba(215, 218, 223, 0.7);
+
+  box-shadow:
+    0 1px 0
+      rgba(255, 255, 255, 0.95)
+      inset,
+    0 5px 18px
+      rgba(15, 23, 42, 0.035),
+    0 18px 40px
+      rgba(15, 23, 42, 0.025);
+
+  overflow: visible;
+
+  isolation: isolate;
+}
+
+
+/* =====================================================
+   LUZ SUAVE
+===================================================== */
+
+.header::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 28%,
+      rgba(255, 255, 255, 0.55) 50%,
+      rgba(255, 255, 255, 0.18) 72%,
+      transparent 100%
+    );
+
+  opacity: 0.55;
+}
+
+
+/* =====================================================
+   SEM LINHA AMARELA
+===================================================== */
+
+.header::after {
+  display: none;
+}
+
+
+/* =====================================================
+   CONTAINER CENTRAL
+===================================================== */
+
+.headerContent {
+  width: 80%;
+
+  max-width: 1500px;
+
+  min-height: 78px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(300px, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 28px;
+
+  padding:
+    10px
+    0;
+
+  box-sizing: border-box;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logoArea {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  flex-shrink: 0;
+}
+
+
+.logoArea img {
+  width: 145px;
+
+  height: auto;
+
+  display: block;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.22s ease,
+    filter 0.22s ease;
+}
+
+
+.logoArea img:hover {
+  transform:
+    translateY(-1px)
+    scale(1.025);
+
+  filter:
+    drop-shadow(
+      0 5px 10px
+      rgba(0, 0, 0, 0.08)
+    );
+}
+
+
+/* =====================================================
+   BUSCA
+===================================================== */
+
+.searchArea {
+  width: 100%;
+
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    0
+    8px
+    0
+    15px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.88),
+      rgba(247, 248, 249, 0.78)
+    );
+
+  border:
+    1px solid
+    rgba(210, 212, 216, 0.72);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 1px 0
+      rgba(255, 255, 255, 0.95)
+      inset,
+    0 5px 15px
+      rgba(0, 0, 0, 0.035);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
+}
+
+
+.searchArea:hover {
+  background:
+    rgba(255, 255, 255, 0.96);
+
+  border-color:
+    rgba(195, 198, 202, 0.9);
+
+  box-shadow:
+    0 1px 0
+      rgba(255, 255, 255, 1)
+      inset,
+    0 7px 20px
+      rgba(0, 0, 0, 0.055);
+}
+
+
+.searchArea:focus-within {
+  background:
+    #ffffff;
+
+  border-color:
+    rgba(205, 207, 211, 0.95);
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 0 0 3px
+      rgba(17, 24, 39, 0.035),
+    0 8px 22px
+      rgba(0, 0, 0, 0.055);
+}
+
+
+/* =====================================================
+   ÍCONE BUSCA
+===================================================== */
+
+.searchIcon {
+  color: #d5a600;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.searchArea input {
+  width: 100%;
+
+  height: 100%;
+
+  min-width: 0;
+
+  flex: 1;
+
+  border: none;
+
+  outline: none;
+
+  background:
+    transparent;
+
+  color: #202020;
+
+  font-size: 13px;
+
+  font-weight: 500;
+}
+
+
+.searchArea input::placeholder {
+  color:
+    #999da3;
+}
+
+
+/* =====================================================
+   BOTÃO BUSCAR
+===================================================== */
+
+.searchHint {
+  height: 32px;
+
+  padding:
+    0
+    14px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd600 0%,
+      #ffc400 52%,
+      #f5b900 100%
+    );
+
+  color:
+    #242424;
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+
+  white-space:
+    nowrap;
+
+  box-shadow:
+    0 3px 8px
+      rgba(255, 196, 0, 0.18),
+    0 1px 0
+      rgba(255, 255, 255, 0.35)
+      inset;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+
+.searchHint:hover {
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 6px 13px
+      rgba(255, 196, 0, 0.22);
+}
+
+
+/* =====================================================
+   ÁREA DIREITA
+===================================================== */
+
+.storeInfo {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    flex-end;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  position: relative;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.storeStatus {
+  min-height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    6px
+    10px;
+
+  border-radius:
+    11px;
+
+  box-sizing:
+    border-box;
+
+  flex-shrink: 0;
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+  box-shadow:
+    0 1px 0
+      rgba(255, 255, 255, 0.9)
+      inset,
+    0 4px 12px
+      rgba(0, 0, 0, 0.025);
+}
+
+
+.storeStatusText {
+  display: flex;
+
+  flex-direction:
+    column;
+
+  line-height:
+    1.05;
+
+  white-space:
+    nowrap;
+}
+
+
+.storeStatus strong {
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+
+  color:
+    #222222;
+}
+
+
+.storeStatus span {
+  margin-top:
+    3px;
+
+  font-size:
+    8px;
+
+  color:
+    #777777;
+}
+
+
+/* =====================================================
+   STATUS ABERTO
+===================================================== */
+
+.storeStatus.opened {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(244, 255, 247, 0.92),
+      rgba(235, 252, 240, 0.8)
+    );
+
+  border:
+    1px solid
+    rgba(198, 235, 209, 0.8);
+}
+
+
+.storeStatus.opened svg {
+  color:
+    #22c55e;
+}
+
+
+/* =====================================================
+   STATUS FECHADO
+===================================================== */
+
+.storeStatus.closed {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 246, 246, 0.92),
+      rgba(253, 235, 235, 0.8)
+    );
+
+  border:
+    1px solid
+    rgba(242, 205, 205, 0.85);
+}
+
+
+.storeStatus.closed svg {
+  color:
+    #ef4444;
+}
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.iconButton,
+.social {
+  width:
+    39px;
+
+  height:
+    39px;
+
+  min-width:
+    39px;
+
+  padding:
+    0;
+
+  border:
+    none;
+
+  border-radius:
+    11px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  cursor:
+    pointer;
+
+  flex-shrink:
+    0;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+
+/* =====================================================
+   INFO
+===================================================== */
+
+.iconButton {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(235, 237, 240, 0.88)
+    );
+
+  border:
+    1px solid
+    rgba(220, 222, 225, 0.9);
+
+  color:
+    #333333;
+
+  box-shadow:
+    0 1px 0
+      #ffffff
+      inset,
+    0 4px 10px
+      rgba(0, 0, 0, 0.035);
+}
+
+
+.iconButton:hover {
+  background:
+    #ffffff;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 7px 16px
+      rgba(0, 0, 0, 0.075);
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp {
+  background:
+    linear-gradient(
+      145deg,
+      #2add6e,
+      #20bd5d
+    );
+
+  color:
+    #ffffff;
+
+  box-shadow:
+    0 5px 12px
+      rgba(37, 211, 102, 0.19),
+    0 1px 0
+      rgba(255, 255, 255, 0.24)
+      inset;
+}
+
+
+.whatsapp:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 18px
+      rgba(37, 211, 102, 0.29);
+}
+
+
+/* =====================================================
+   WRAPPER INFO
+===================================================== */
+
+.infoWrapper {
+  position:
+    relative;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+}
+
+
+/* =====================================================
+   POPUP LOCALIZAÇÃO
+===================================================== */
+
+.locationPopup {
+  position:
+    absolute;
+
+  top:
+    calc(100% + 13px);
+
+  right:
+    0;
+
+  width:
+    285px;
+
+  padding:
+    14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.97),
+      rgba(247, 248, 249, 0.94)
+    );
+
+  border:
+    1px solid
+    rgba(220, 221, 224, 0.82);
+
+  border-radius:
+    15px;
+
+  box-shadow:
+    0 16px 40px
+      rgba(0, 0, 0, 0.13);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  z-index:
+    3000;
+
+  box-sizing:
+    border-box;
+
+  animation:
+    locationPopupIn
+    0.18s
+    ease-out;
+}
+
+
+/* =====================================================
+   SETA POPUP
+===================================================== */
+
+.locationPopup::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    -7px;
+
+  right:
+    13px;
+
+  width:
+    13px;
+
+  height:
+    13px;
+
+  background:
+    #ffffff;
+
+  border-left:
+    1px solid
+    #e7e7e7;
+
+  border-top:
+    1px solid
+    #e7e7e7;
+
+  transform:
+    rotate(45deg);
+}
+
+
+/* =====================================================
+   CABEÇALHO POPUP
+===================================================== */
+
+.locationHeader {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    9px;
+
+  position:
+    relative;
+}
+
+
+.locationIcon {
+  width:
+    36px;
+
+  height:
+    36px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex-shrink:
+    0;
+
+  border-radius:
+    10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff9dc,
+      #fff2b4
+    );
+
+  color:
+    #d6a900;
+}
+
+
+.locationTitle {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  line-height:
+    1.2;
+}
+
+
+.locationTitle strong {
+  font-size:
+    12px;
+
+  font-weight:
+    800;
+
+  color:
+    #222222;
+}
+
+
+.locationTitle span {
+  margin-top:
+    3px;
+
+  font-size:
+    9px;
+
+  color:
+    #888888;
+}
+
+
+/* =====================================================
+   FECHAR POPUP
+===================================================== */
+
+.locationClose {
+  position:
+    absolute;
+
+  top:
+    -4px;
+
+  right:
+    -4px;
+
+  width:
+    24px;
+
+  height:
+    24px;
+
+  padding:
+    0;
+
+  border:
+    none;
+
+  border-radius:
+    7px;
+
+  background:
+    #f2f2f2;
+
+  color:
+    #777777;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  cursor:
+    pointer;
+}
+
+
+.locationClose:hover {
+  background:
+    #eaeaea;
+
+  color:
+    #222222;
+}
+
+
+/* =====================================================
+   ENDEREÇO
+===================================================== */
+
+.locationAddress {
+  margin-top:
+    13px;
+
+  padding:
+    11px;
+
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  gap:
+    8px;
+
+  border-radius:
+    10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fafafa,
+      #f4f5f6
+    );
+
+  color:
+    #555555;
+
+  font-size:
+    10px;
+
+  line-height:
+    1.45;
+}
+
+
+.locationAddress svg {
+  margin-top:
+    1px;
+
+  color:
+    #d6a900;
+
+  flex-shrink:
+    0;
+}
+
+
+/* =====================================================
+   MAPA
+===================================================== */
+
+.mapButton {
+  width:
+    100%;
+
+  height:
+    35px;
+
+  margin-top:
+    10px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    6px;
+
+  border-radius:
+    9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd600,
+      #ffc000
+    );
+
+  color:
+    #222222;
+
+  text-decoration:
+    none;
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+
+  box-sizing:
+    border-box;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.mapButton:hover {
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 5px 14px
+      rgba(255, 193, 7, 0.24);
+}
+
+
+/* =====================================================
+   ANIMAÇÃO
+===================================================== */
+
+@keyframes locationPopupIn {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(-5px)
+      scale(0.97);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* =====================================================
+   NOTEBOOK
+===================================================== */
+
+@media (max-width: 1200px) {
+
+  .headerContent {
+    width:
+      92%;
+
+    gap:
+      18px;
+  }
+
+
+  .logoArea img {
+    width:
+      130px;
+  }
+
+
+  .storeStatus {
+    padding:
+      6px
+      8px;
+  }
+
+
+  .storeStatus span {
+    display:
+      none;
+  }
+
+}
+
+
+/* Header compacto: logo, status e atalhos na primeira linha. */
+@media (max-width: 768px) {
+  .header {
+    background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,248,250,.95));
+    backdrop-filter: blur(20px) saturate(125%);
+    -webkit-backdrop-filter: blur(20px) saturate(125%);
+  }
+  .headerContent {
+    width: 100%;
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    gap: 0 8px;
+    padding: 1px 12px 7px;
+  }
+  .logoArea {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    align-items: center;
+    padding: 0;
+  }
+  .logoArea img {
+    width: 128px;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+  }
+  .storeInfo {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 6px;
+    position: relative;
+  }
+  .storeStatus {
+    position: static;
+    transform: none;
+    min-height: 34px;
+    padding: 5px 8px;
+    gap: 5px;
+    border-radius: 9px;
+  }
+  .storeStatus svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .storeStatus strong { font-size: 10px; }
+  .storeStatus span { display: block; margin-top: 3px; font-size: 8px; }
+  .iconButton, .social {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 9px;
+  }
+  .searchArea {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 42px;
+    min-width: 0;
+    padding: 0 7px 0 12px;
+    border-radius: 12px;
+    gap: 8px;
+  }
+  .searchArea input { font-size: 13px; }
+  .searchArea input::placeholder { font-size: 12px; }
+  .searchHint { height: 30px; padding: 0 12px; font-size: 9px; }
+  .locationPopup {
+    width: min(270px, calc(100vw - 24px));
+    right: -40px;
+    top: calc(100% + 11px);
+    padding: 12px;
+  }
+  .locationPopup::before { right: 51px; }
+}
+
+@media (max-width: 390px) {
+  .headerContent { padding: 0 9px 6px; column-gap: 6px; }
+  .logoArea img { width: 108px; }
+  .storeInfo { gap: 4px; }
+  .storeStatus { padding: 5px 6px; gap: 4px; }
+  .storeStatus svg { width: 12px; height: 12px; }
+  .storeStatus strong { font-size: 9px; }
+  .storeStatus span { font-size: 7px; }
+}
+
+@media (max-width: 340px) {
+  .logoArea img { width: 92px; }
+  .storeStatus span { display: none; }
+  .searchHint { padding: 0 9px; }
+}
+
+/* Separa a borda da busca da borda inferior do header compacto. */
+@media (max-width: 768px) {
+  .header .searchArea,
+  .header .searchArea:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95);
+  }
+  .header .searchArea:focus-within {
+    transform: none;
+    box-shadow: 0 0 0 2px rgba(17, 24, 39, .035);
+  }
+}

@@ -1,0 +1,11 @@
+import { useEffect, useState } from 'react';
+import { supabase } from '../../supabase/supabase';
+import { Field, Notice, messageFor } from './ManagementUI';
+export default function AdminAccessGate({children}){
+ const [state,setState]=useState('loading'),[email,setEmail]=useState(''),[password,setPassword]=useState(''),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ useEffect(()=>{let live=true;let sequence=0;async function check(session){const current=++sequence;if(!live)return;if(!session){setState('login');return;}setState('loading');const {data,error}=await supabase.rpc('admin_has_access');if(!live||current!==sequence)return;setState(data&&!error?'allowed':'denied');if(error)setError(messageFor(error));}
+ supabase.auth.getSession().then(({data,error})=>{if(error){if(live){setError(messageFor(error));setState('login');}}else check(data.session);});const {data:{subscription}}=supabase.auth.onAuthStateChange((event,session)=>{if(event==='INITIAL_SESSION')return;setTimeout(()=>check(session),0);});return()=>{live=false;sequence++;subscription.unsubscribe();};},[]);
+ async function login(e){e.preventDefault();setBusy(true);setError('');try{const {error}=await supabase.auth.signInWithPassword({email:email.trim(),password});if(error)throw error;}catch(e){setError(messageFor(e));}finally{setBusy(false);}}
+ if(state==='allowed')return children;
+ return <div className="ux-login"><div className="ux-login-card"><span className="ux-badge amber">ALA DELIVERY · ADMIN</span><h1>{state==='loading'?'Verificando acesso…':state==='denied'?'Conta sem permissão':'Acesse seu painel'}</h1>{state==='login'?<form onSubmit={login}><p>Use sua conta administrativa do Supabase Auth.</p><Field label="E-mail" autoComplete="username" type="email" required value={email} onChange={e=>setEmail(e.target.value)}/><Field label="Senha" autoComplete="current-password" type="password" required value={password} onChange={e=>setPassword(e.target.value)}/><Notice>{error}</Notice><button className="ux-button primary" disabled={busy}>{busy?'Entrando…':'Entrar'}</button></form>:state==='denied'?<><p>O e-mail precisa ser autorizado no SQL de configuração do admin.</p><Notice>{error}</Notice><button className="ux-button" onClick={()=>supabase.auth.signOut()}>Entrar com outra conta</button></>:null}<p><a href="/">Voltar à loja</a></p></div></div>;
+}

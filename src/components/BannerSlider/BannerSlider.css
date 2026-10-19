@@ -1,0 +1,513 @@
+/* =========================================================
+   BANNER SLIDER
+========================================================= */
+
+.bannerSlider {
+  position: relative;
+
+  width: 100%;
+
+  margin-top: 12px;
+
+  overflow: hidden;
+
+  border: none;
+  outline: none;
+
+  border-radius: 18px;
+
+  background: #f3f3f3;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.05);
+
+  isolation: isolate;
+
+  box-sizing: border-box;
+
+  touch-action: pan-y;
+}
+
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.bannerTrack {
+  width: 100%;
+
+  display: flex;
+
+  transition:
+    transform 0.6s
+    cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  will-change: transform;
+}
+
+
+/* =========================================================
+   SLIDE
+========================================================= */
+
+.bannerSlide {
+  position: relative;
+
+  flex: 0 0 100%;
+
+  width: 100%;
+
+  aspect-ratio: 3.2 / 1;
+
+  overflow: hidden;
+
+  background: #f3f3f3;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   IMAGEM
+========================================================= */
+
+.bannerSlide img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center center;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  border: none;
+  outline: none;
+
+  transform: scale(1.001);
+
+  transition:
+    transform 5s ease;
+
+  backface-visibility: hidden;
+}
+
+
+/* =========================================================
+   MICRO ZOOM DESKTOP
+========================================================= */
+
+@media (hover: hover) {
+  .bannerSlide:hover img {
+    transform: scale(1.02);
+  }
+}
+
+
+/* =========================================================
+   CAMADA VISUAL SUTIL
+========================================================= */
+
+.bannerSlide::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 70%,
+      rgba(0, 0, 0, 0.04) 100%
+    );
+}
+
+
+/* =========================================================
+   SETAS
+========================================================= */
+
+.bannerArrow {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 6;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(-50%);
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.15);
+
+  border-radius: 50%;
+
+  background:
+    rgba(15, 15, 15, 0.28);
+
+  color: #ffffff;
+
+  font-size: 29px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  opacity: 0;
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.12);
+
+  transition:
+    opacity 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+
+.bannerSlider:hover .bannerArrow {
+  opacity: 1;
+}
+
+
+.bannerArrow:hover {
+  background:
+    rgba(15, 15, 15, 0.5);
+
+  transform:
+    translateY(-50%)
+    scale(1.06);
+}
+
+
+.bannerArrow:active {
+  transform:
+    translateY(-50%)
+    scale(0.96);
+}
+
+
+.bannerArrowLeft {
+  left: 12px;
+}
+
+
+.bannerArrowRight {
+  right: 12px;
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.bannerDots {
+  position: absolute;
+
+  left: 50%;
+  bottom: 10px;
+
+  transform: translateX(-50%);
+
+  z-index: 7;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 7px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(20, 20, 20, 0.22);
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   DOT
+========================================================= */
+
+.bannerDot {
+  width: 6px;
+  height: 6px;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  cursor: pointer;
+
+  transition:
+    width 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+.bannerDot:hover {
+  background: #ffffff;
+
+  transform: scale(1.15);
+}
+
+
+.bannerDot.active {
+  width: 20px;
+
+  background: #ffd21c;
+
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.13);
+}
+
+
+/* =========================================================
+   NOTEBOOK
+========================================================= */
+
+@media (max-width: 1200px) {
+  .bannerSlider {
+    margin-top: 10px;
+
+    border-radius: 16px;
+  }
+
+  .bannerSlide {
+    aspect-ratio: 3 / 1;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .bannerSlider {
+    border-radius: 14px;
+  }
+
+  .bannerSlide {
+    aspect-ratio: 2.6 / 1;
+  }
+
+  .bannerDots {
+    bottom: 8px;
+  }
+
+  .bannerArrow {
+    width: 36px;
+    height: 36px;
+
+    font-size: 26px;
+  }
+
+  .bannerArrowLeft {
+    left: 9px;
+  }
+
+  .bannerArrowRight {
+    right: 9px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .bannerSlider {
+    margin-top: 8px;
+
+    border-radius: 13px;
+
+    box-shadow:
+      0 4px 14px rgba(0, 0, 0, 0.035);
+  }
+
+  .bannerSlide {
+    aspect-ratio: 2.15 / 1;
+  }
+
+  .bannerSlide img {
+    object-fit: cover;
+
+    object-position: center center;
+
+    transform: none;
+  }
+
+  .bannerSlide::after {
+    background:
+      linear-gradient(
+        to bottom,
+        transparent 75%,
+        rgba(0, 0, 0, 0.035)
+      );
+  }
+
+  .bannerArrow {
+    display: none;
+  }
+
+  .bannerDots {
+    bottom: 7px;
+
+    gap: 4px;
+
+    padding: 4px 6px;
+  }
+
+  .bannerDot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .bannerDot.active {
+    width: 16px;
+  }
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 420px) {
+  .bannerSlider {
+    margin-top: 7px;
+
+    border-radius: 12px;
+
+    box-shadow:
+      0 3px 10px rgba(0, 0, 0, 0.03);
+  }
+
+  .bannerSlide {
+    aspect-ratio: 2 / 1;
+  }
+
+  .bannerDots {
+    bottom: 6px;
+  }
+
+  .bannerDot.active {
+    width: 14px;
+  }
+}
+
+
+/* =========================================================
+   CELULAR MUITO PEQUENO
+========================================================= */
+
+@media (max-width: 360px) {
+  .bannerSlider {
+    border-radius: 11px;
+  }
+
+  .bannerSlide {
+    aspect-ratio: 1.9 / 1;
+  }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .bannerTrack {
+    transition: none;
+  }
+
+  .bannerSlide img {
+    transition: none;
+
+    transform: none;
+  }
+
+  .bannerDot {
+    transition: none;
+  }
+
+  .bannerArrow {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .bannerSlider {
+    margin-top: 3px;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .bannerSlide {
+    aspect-ratio: 3.5 / 1;
+  }
+
+  .bannerDots {
+    bottom: 4px;
+    gap: 3px;
+    padding: 3px 5px;
+  }
+
+  .bannerDot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .bannerDot.active {
+    width: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .bannerSlide {
+    aspect-ratio: 3.2 / 1;
+  }
+}
+
+@media (max-width: 360px) {
+  .bannerSlide {
+    aspect-ratio: 3 / 1;
+  }
+}

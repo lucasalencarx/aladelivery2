@@ -1,0 +1,1515 @@
+/* =========================================================
+
+   RECOMMENDED
+
+\========================================================= */
+
+.recommended {
+
+  width: 100%;
+
+  margin-top: 28px;
+
+}
+
+
+/* =========================================================
+
+   HEADER
+
+\========================================================= */
+
+.recommendedHeader {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 15px;
+
+}
+
+
+/* =========================================================
+
+   TÍTULO
+
+\========================================================= */
+
+.recommendedTitleArea {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+
+}
+
+
+.recommendedIcon {
+
+  width: 32px;
+
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: #fff7d6;
+
+  color: #e4ae00;
+
+  border:
+
+    1px solid rgba(234, 184, 0, 0.12);
+
+}
+
+
+.recommendedTitleArea h2 {
+
+  margin: 0;
+
+  color: #1e1e1e;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.3px;
+
+}
+
+
+.recommendedTitleArea p {
+
+  margin: 3px 0 0;
+
+  color: #929292;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+}
+
+
+/* =========================================================
+
+   VER TODOS
+
+\========================================================= */
+
+.seeAllButton {
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 6px 3px;
+
+  color: #8d7100;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+
+    color 0.2s ease;
+
+}
+
+
+.seeAllButton span {
+
+  font-size: 16px;
+
+  transition:
+
+    transform 0.2s ease;
+
+}
+
+
+.seeAllButton:hover {
+
+  color: #111;
+
+}
+
+
+.seeAllButton:hover span {
+
+  transform: translateX(3px);
+
+}
+
+
+/* =========================================================
+
+   GRID DESKTOP
+
+\========================================================= */
+
+.recommendedGrid {
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+
+    repeat(6, minmax(0, 1fr));
+
+  gap: 11px;
+
+}
+
+
+/* =========================================================
+
+   CARD
+
+\========================================================= */
+
+.productCard {
+
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border:
+
+    1px solid #eeeeee;
+
+  border-radius: 14px;
+
+  box-shadow:
+
+    0 3px 11px rgba(15, 23, 42, 0.035);
+
+  transition:
+
+    transform 0.2s ease,
+
+    box-shadow 0.2s ease,
+
+    border-color 0.2s ease;
+
+}
+
+
+.productCard:hover {
+
+  transform: translateY(-3px);
+
+  border-color: #e3e3e3;
+
+  box-shadow:
+
+    0 10px 24px rgba(15, 23, 42, 0.075);
+
+}
+
+
+/* =========================================================
+
+   IMAGEM
+
+\========================================================= */
+
+.productImageArea {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 135px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+}
+
+
+.productImageArea img {
+  width: auto;
+  height: auto;
+  max-width: 82%;
+  max-height: 105px;
+  display: block;
+  object-fit: contain;
+  box-sizing: border-box;
+  padding: 0;
+  transition:
+    transform 0.25s ease;
+}
+
+
+.productCard:hover .productImageArea img {
+
+  transform: scale(1.035);
+
+}
+
+
+/* =========================================================
+
+   GELADA
+
+   PEQUENO E DISCRETO
+
+\========================================================= */
+
+.coldIndicator {
+
+  position: absolute;
+
+  top: 7px;
+
+  left: 7px;
+
+  z-index: 5;
+
+  height: 17px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 3px;
+
+  padding: 0 5px;
+
+  border-radius: 5px;
+
+  color: #147ca8;
+
+  background:
+
+    rgba(235, 248, 255, 0.96);
+
+  border:
+
+    1px solid rgba(40, 158, 205, 0.14);
+
+  font-size: 6.8px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing: 0.1px;
+
+  white-space: nowrap;
+
+  box-shadow:
+
+    0 1px 4px rgba(15, 23, 42, 0.045);
+
+  pointer-events: none;
+
+}
+
+
+.coldIndicator svg {
+
+  width: 8px;
+
+  height: 8px;
+
+  flex-shrink: 0;
+
+  color: #159bd3;
+
+}
+
+
+/* =========================================================
+
+   ORELHA COMERCIAL
+
+\========================================================= */
+
+.productBadge {
+
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  z-index: 6;
+
+  min-height: 25px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 4px;
+
+  padding:
+
+    4px 9px
+
+    4px 8px;
+
+  border-radius:
+
+    0
+
+    13px
+
+    0
+
+    10px;
+
+  font-size: 7.2px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: 0.2px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  box-shadow:
+
+    -2px 3px 8px rgba(0, 0, 0, 0.09);
+
+  pointer-events: none;
+
+}
+
+
+.productBadge svg {
+
+  width: 9px;
+
+  height: 9px;
+
+  flex-shrink: 0;
+
+}
+
+
+/* =========================================================
+
+   OFERTA
+
+\========================================================= */
+
+.productBadge.offer {
+
+  color: #ffffff;
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #111111,
+
+      #292929
+
+    );
+
+}
+
+
+/* =========================================================
+
+   IMPERDÍVEL
+
+\========================================================= */
+
+.productBadge.mustHave {
+
+  color: #5a4100;
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #ffda2d,
+
+      #ffc400
+
+    );
+
+}
+
+
+/* =========================================================
+
+   PROMOÇÃO
+
+\========================================================= */
+
+.productBadge.promotion {
+
+  color: #ffffff;
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #ed4943,
+
+      #cb211c
+
+    );
+
+}
+
+
+/* =========================================================
+
+   DESTAQUE
+
+\========================================================= */
+
+.productBadge.featured {
+
+  color: #574000;
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #ffe88c,
+
+      #ffd95d
+
+    );
+
+}
+
+
+/* =========================================================
+
+   NOVIDADE
+
+\========================================================= */
+
+.productBadge.new {
+
+  color: #ffffff;
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #925ac7,
+
+      #703ba6
+
+    );
+
+}
+
+
+/* =========================================================
+
+   MAIS VENDIDO
+
+\========================================================= */
+
+.productBadge.bestSeller {
+
+  color: #ffffff;
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #2aaa60,
+
+      #187d42
+
+    );
+
+}
+
+
+/* =========================================================
+
+   CONTEÚDO
+
+\========================================================= */
+
+.productContent {
+
+  padding: 10px 11px 11px;
+
+}
+
+
+.productContent h3 {
+
+  margin: 0;
+
+  min-height: 31px;
+
+  color: #222222;
+
+  font-size: 12px;
+
+  font-weight: 750;
+
+  line-height: 1.3;
+
+  display: -webkit-box;
+
+-webkit-line-clamp: 2;
+
+-webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+}
+
+
+/* =========================================================
+
+   DESCRIÇÃO
+
+\========================================================= */
+
+.productDescription {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #999999;
+
+  font-size: 9px;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+}
+
+
+/* =========================================================
+
+   PARTE INFERIOR
+
+\========================================================= */
+
+.productBottom {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 8px;
+
+  margin-top: 9px;
+
+}
+
+
+/* =========================================================
+
+   PREÇO
+
+\========================================================= */
+
+.productPriceArea {
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+}
+
+
+.oldPrice {
+
+  color: #aaaaaa;
+
+  font-size: 8px;
+
+  font-weight: 500;
+
+  text-decoration: line-through;
+
+}
+
+
+.currentPrice {
+
+  color: #191919;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+}
+
+
+/* =========================================================
+
+   BOTÃO +
+
+\========================================================= */
+
+.addProductButton {
+
+  width: 30px;
+
+  height: 30px;
+
+  min-width: 30px;
+
+  padding: 0;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 8px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #ffd21c;
+
+  color: #191919;
+
+  cursor: pointer;
+
+  box-shadow:
+
+    0 4px 10px rgba(255, 210, 28, 0.22);
+
+  transition:
+
+    transform 0.18s ease,
+
+background 0.18s ease,
+
+    box-shadow 0.18s ease;
+
+}
+
+
+.addProductButton:hover {
+
+  background: #ffc800;
+
+  transform: scale(1.06);
+
+  box-shadow:
+
+    0 6px 14px rgba(255, 200, 0, 0.3);
+
+}
+
+
+.addProductButton:active {
+
+  transform: scale(0.94);
+
+}
+
+
+/* =========================================================
+
+   NOTEBOOK
+
+\========================================================= */
+
+@media (max-width: 1250px) {
+
+.recommendedGrid {
+
+    grid-template-columns:
+
+      repeat(5, minmax(0, 1fr));
+
+  }
+
+}
+
+
+/* =========================================================
+
+   TABLET
+
+\========================================================= */
+
+@media (max-width: 1050px) {
+
+.recommendedGrid {
+
+    grid-template-columns:
+
+      repeat(4, minmax(0, 1fr));
+
+  }
+
+}
+
+
+/* =========================================================
+
+   MOBILE
+
+\========================================================= */
+
+@media (max-width: 768px) {
+
+.recommended {
+
+    margin-top: 23px;
+
+  }
+
+
+  /* HEADER */
+
+.recommendedHeader {
+
+    margin-bottom: 13px;
+
+    gap: 8px;
+
+  }
+
+
+.recommendedIcon {
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 9px;
+
+  }
+
+
+.recommendedTitleArea {
+
+    gap: 8px;
+
+  }
+
+
+.recommendedTitleArea h2 {
+
+    font-size: 16px;
+
+  }
+
+
+.recommendedTitleArea p {
+
+    display: none;
+
+  }
+
+
+.seeAllButton {
+
+    font-size: 10px;
+
+    padding: 4px 0;
+
+  }
+
+
+  /* =======================================================
+
+     CARROSSEL HORIZONTAL
+
+  \======================================================= */
+
+.recommendedGrid {
+
+    display: flex;
+
+    width: calc(100% + 12px);
+
+    gap: 10px;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    padding:
+
+      2px 12px 13px 0;
+
+    scroll-snap-type:
+
+      x proximity;
+
+-webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+
+  }
+
+
+.recommendedGrid::-webkit-scrollbar {
+
+    display: none;
+
+  }
+
+
+  /* =======================================================
+
+     CARD
+
+  \======================================================= */
+
+.productCard {
+
+    flex: 0 0 145px;
+
+    width: 145px;
+
+    border-radius: 13px;
+
+    scroll-snap-align: start;
+
+  }
+
+
+.productCard:hover {
+
+    transform: none;
+
+    box-shadow:
+
+      0 3px 11px rgba(15, 23, 42, 0.035);
+
+  }
+
+
+  /* =======================================================
+
+     IMAGEM
+
+  \======================================================= */
+
+.productImageArea {
+
+    height: 122px;
+
+  }
+
+
+.productImageArea img {
+    max-width: 80%;
+    max-height: 92px;
+    padding: 0;
+  }
+
+
+.productCard:hover .productImageArea img {
+
+    transform: none;
+
+  }
+
+
+  /* =======================================================
+
+     GELADA
+
+  \======================================================= */
+
+.coldIndicator {
+
+    top: 5px;
+
+    left: 5px;
+
+    height: 15px;
+
+    padding: 0 4px;
+
+    gap: 2px;
+
+    border-radius: 4px;
+
+    font-size: 5.9px;
+
+  }
+
+
+.coldIndicator svg {
+
+    width: 7px;
+
+    height: 7px;
+
+  }
+
+
+  /* =======================================================
+
+     ORELHA COMERCIAL
+
+  \======================================================= */
+
+.productBadge {
+
+    min-height: 21px;
+
+    padding:
+
+      3px 7px
+
+      3px 6px;
+
+    border-radius:
+
+      0
+
+      12px
+
+      0
+
+      8px;
+
+    gap: 3px;
+
+    font-size: 6.3px;
+
+  }
+
+
+.productBadge svg {
+
+    width: 7px;
+
+    height: 7px;
+
+  }
+
+
+  /* =======================================================
+
+     CONTEÚDO
+
+  \======================================================= */
+
+.productContent {
+
+    padding:
+
+      9px 9px 10px;
+
+  }
+
+
+.productContent h3 {
+
+    min-height: 29px;
+
+    font-size: 11px;
+
+  }
+
+
+.productDescription {
+
+    font-size: 8px;
+
+  }
+
+
+  /* =======================================================
+
+     PREÇO
+
+  \======================================================= */
+
+.productBottom {
+
+    margin-top: 8px;
+
+  }
+
+
+.currentPrice {
+
+    font-size: 13px;
+
+  }
+
+
+.oldPrice {
+
+    font-size: 7.5px;
+
+  }
+
+
+  /* =======================================================
+
+     BOTÃO
+
+  \======================================================= */
+
+.addProductButton {
+
+    width: 29px;
+
+    height: 29px;
+
+    min-width: 29px;
+
+    border-radius: 8px;
+
+  }
+
+
+.addProductButton svg {
+
+    width: 18px;
+
+    height: 18px;
+
+  }
+
+}
+
+
+/* =========================================================
+
+   CELULAR PEQUENO
+
+\========================================================= */
+
+@media (max-width: 390px) {
+
+.recommendedTitleArea h2 {
+
+    font-size: 15px;
+
+  }
+
+
+.recommendedIcon {
+
+    width: 29px;
+
+    height: 29px;
+
+  }
+
+
+.productCard {
+
+    flex-basis: 138px;
+
+    width: 138px;
+
+  }
+
+
+.productImageArea {
+
+    height: 116px;
+
+  }
+
+  .productImageArea img {
+    max-width: 78%;
+    max-height: 86px;
+  }
+
+
+.currentPrice {
+
+    font-size: 12.5px;
+
+  }
+
+
+.coldIndicator {
+
+    top: 5px;
+
+    left: 5px;
+
+    height: 14px;
+
+    padding: 0 3px;
+
+    font-size: 5.6px;
+
+  }
+
+
+.coldIndicator svg {
+
+    width: 6px;
+
+    height: 6px;
+
+  }
+
+
+.productBadge {
+
+    min-height: 20px;
+
+    padding:
+
+      3px 6px
+
+      3px 5px;
+
+    font-size: 6px;
+
+  }
+
+
+.productBadge svg {
+
+    width: 7px;
+
+    height: 7px;
+
+  }
+
+}
+
+
+/* =========================================================
+
+   ORELHA COMERCIAL — COMPACTA E SUAVE
+
+\========================================================= */
+
+.productBadge {
+
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  z-index: 6;
+
+  min-height: 18px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 2px;
+
+  padding: 2px 6px 2px 5px;
+
+  border-radius:
+
+    0
+
+    13px
+
+    0
+
+    7px;
+
+  font-size: 5.8px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  letter-spacing: 0.08px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  box-shadow:
+
+    -1px 2px 5px rgba(15, 23, 42, 0.045);
+
+  pointer-events: none;
+
+}
+
+
+.productBadge svg {
+
+  width: 7px;
+
+  height: 7px;
+
+  flex-shrink: 0;
+
+}
+
+
+/* =========================================================
+
+   OFERTA — CINZA CLARO
+
+\========================================================= */
+
+.productBadge.offer {
+
+  color: #555b63;
+
+  background: #f0f2f4;
+
+  border:
+
+    1px solid rgba(80, 90, 100, 0.07);
+
+}
+
+
+/* =========================================================
+
+   IMPERDÍVEL — AMARELO SUAVE
+
+\========================================================= */
+
+.productBadge.mustHave {
+
+  color: #806300;
+
+  background: #fff2b8;
+
+  border:
+
+    1px solid rgba(205, 166, 0, 0.10);
+
+}
+
+
+/* =========================================================
+
+   PROMOÇÃO — VERMELHO / ROSA SUAVE
+
+\========================================================= */
+
+.productBadge.promotion {
+
+  color: #b64a47;
+
+  background: #ffe4e2;
+
+  border:
+
+    1px solid rgba(190, 70, 65, 0.08);
+
+}
+
+
+/* =========================================================
+
+   DESTAQUE — DOURADO CLARO
+
+\========================================================= */
+
+.productBadge.featured {
+
+  color: #876c13;
+
+  background: #fff4c9;
+
+  border:
+
+    1px solid rgba(190, 155, 35, 0.09);
+
+}
+
+
+/* =========================================================
+
+   NOVIDADE — LILÁS CLARO
+
+\========================================================= */
+
+.productBadge.new {
+
+  color: #76579b;
+
+  background: #f1e8fb;
+
+  border:
+
+    1px solid rgba(115, 80, 155, 0.08);
+
+}
+
+
+/* =========================================================
+
+   MAIS VENDIDO — VERDE CLARO
+
+\========================================================= */
+
+.productBadge.bestSeller {
+
+  color: #3d8059;
+
+  background: #e3f5e9;
+
+  border:
+
+    1px solid rgba(45, 135, 80, 0.08);
+
+}
+
+
+/* =========================================================
+
+   MOBILE
+
+\========================================================= */
+
+@media (max-width: 768px) {
+
+.productBadge {
+
+    min-height: 17px;
+
+    padding: 2px 5px 2px 4px;
+
+    gap: 2px;
+
+    border-radius:
+
+      0
+
+      12px
+
+      0
+
+      6px;
+
+    font-size: 5.3px;
+
+  }
+
+.productBadge svg {
+
+    width: 6px;
+
+    height: 6px;
+
+  }
+
+}
+
+
+/* =========================================================
+
+   CELULAR PEQUENO
+
+\========================================================= */
+
+@media (max-width: 390px) {
+
+.productBadge {
+
+    min-height: 16px;
+
+    padding: 2px 4px;
+
+    font-size: 5px;
+
+  }
+
+.productBadge svg {
+
+    width: 5.5px;
+
+    height: 5.5px;
+
+  }
+
+}

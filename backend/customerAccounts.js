@@ -1,0 +1,5 @@
+export function installCustomerAccounts(router,{db,run,safe}){
+ const account=safe(async(req,res,next)=>{const bearer=String(req.headers.authorization||'').replace(/^Bearer /,'');const {data,error}=await db.auth.getUser(bearer);const u=data?.user;if(error||!u?.id||!u.email_confirmed_at||!u.email||u.is_anonymous)return res.status(401).json({message:'Entre com seu e-mail confirmado para recuperar pedidos.'});req.accountUser=u.id;next();});
+ router.post('/account/orders/link',account,safe(async(req,res)=>{const proofs=req.body.orders;if(!Array.isArray(proofs)||proofs.length>100)return res.status(422).json({message:'Seleção inválida.'});let linked=0,failed=0;for(const p of proofs){if(!/^[\da-f-]{36}$/i.test(p?.id||'')||!/^[\da-f-]{36}$/i.test(p?.token||'')){failed++;continue;}try{await run(db.rpc('shop_link_customer_order',{p_user:req.accountUser,p_order:p.id,p_token:p.token}));linked++;}catch{failed++;}}res.json({linked,failed});}));
+ router.get('/account/orders',account,safe(async(req,res)=>res.json(await run(db.rpc('shop_account_orders',{p_user:req.accountUser})))));
+}

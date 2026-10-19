@@ -1,0 +1,4 @@
+import {printOrder,brl} from '../utils/orderTools';
+export default function LegacyOrderDetails({order}){
+ const a=order.address||{};return <div className="oc-shell"><header className="oc-header"><div><span>REGISTRO ANTERIOR</span><h1>{order.protocol}</h1><p>{order.customer_name} · {order.customer_phone}</p></div><strong>{brl(order.total_amount)}</strong></header><section className="oc-card"><h2>Produtos do pedido</h2>{(order.items||[]).map((i,n)=><p key={n}>{i.quantity} × {i.product_name} · {brl(i.total_price)}</p>)}<p>{[a.street,a.number,a.neighborhood,a.city].filter(Boolean).join(', ')}</p><p>Entrega {brl(order.delivery_fee)} · Desconto {brl(order.discount_amount)}</p><p>Registro anterior à implantação do chat. Não há retomada de Pix por esta tela.</p><button className="oc-button oc-primary" onClick={()=>{try{printOrder(order);}catch(e){window.alert(e.message);}}}>Imprimir comprovante</button></section></div>;
+}

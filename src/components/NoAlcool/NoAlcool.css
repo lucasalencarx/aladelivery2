@@ -1,0 +1,479 @@
+/* =====================================================
+   NO ALCOOL
+===================================================== */
+
+.no-alcool {
+  width: 100%;
+  margin-top: 34px;
+  margin-bottom: 40px;
+}
+
+
+/* =====================================================
+   HEADER DA SEÇÃO
+===================================================== */
+
+.no-alcool-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+
+  margin-bottom: 18px;
+}
+
+.no-alcool-kicker {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #9a7200;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.no-alcool-header h2 {
+  margin: 0;
+
+  color: #181818;
+
+  font-size: 25px;
+  font-weight: 800;
+
+  line-height: 1.15;
+}
+
+
+/* =====================================================
+   VER TUDO
+===================================================== */
+
+.no-alcool-see-all {
+  padding: 7px 12px;
+
+  border: none;
+  background: transparent;
+
+  color: #8a6700;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  border-radius: 8px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.no-alcool-see-all:hover {
+  background: #fff7d6;
+  color: #111;
+}
+
+
+/* =====================================================
+   LISTA DE PRODUTOS
+===================================================== */
+
+.no-alcool-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(180px, 1fr));
+
+  gap: 16px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.no-alcool-card {
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeeee;
+  border-radius: 14px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.no-alcool-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #e5e5e5;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =====================================================
+   IMAGEM
+===================================================== */
+
+.no-alcool-image-wrapper {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px;
+
+  overflow: hidden;
+
+  background: #fafafa;
+}
+
+.no-alcool-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+
+  transition: transform 0.25s ease;
+}
+
+.no-alcool-card:hover .no-alcool-image {
+  transform: scale(1.035);
+}
+
+
+/* =====================================================
+   ETIQUETA OFERTA
+===================================================== */
+
+.no-alcool-promo {
+  position: absolute;
+
+  top: 10px;
+  left: 10px;
+
+  z-index: 2;
+
+  padding: 5px 8px;
+
+  background: #fbc02d;
+  color: #111111;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* =====================================================
+   BOTÃO +
+===================================================== */
+
+.no-alcool-add {
+  position: absolute;
+
+  right: 10px;
+  bottom: 10px;
+
+  z-index: 3;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #fbc02d;
+  color: #111111;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.no-alcool-add:hover {
+  background: #ffd54f;
+
+  transform: scale(1.07);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.16);
+}
+
+.no-alcool-add:active {
+  transform: scale(0.94);
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.no-alcool-content {
+  padding: 13px 14px 15px;
+}
+
+.no-alcool-content h3 {
+  margin: 0 0 5px;
+
+  min-height: 38px;
+
+  color: #222222;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1.35;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   UNIDADE
+===================================================== */
+
+.no-alcool-unit {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #8a8a8a;
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+
+/* =====================================================
+   PREÇO
+===================================================== */
+
+.no-alcool-price-area {
+  min-height: 42px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-end;
+}
+
+.no-alcool-old-price {
+  margin-bottom: 1px;
+
+  color: #999999;
+
+  font-size: 11px;
+
+  text-decoration: line-through;
+}
+
+.no-alcool-price {
+  color: #111111;
+
+  font-size: 18px;
+  font-weight: 850;
+
+  line-height: 1.2;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.no-alcool-loading {
+  width: 100%;
+
+  padding: 35px 20px;
+
+  text-align: center;
+
+  color: #777777;
+
+  background: #fafafa;
+
+  border: 1px solid #eeeeee;
+  border-radius: 14px;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .no-alcool {
+    margin-top: 28px;
+  }
+
+  .no-alcool-list {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .no-alcool {
+    margin-top: 24px;
+    margin-bottom: 30px;
+  }
+
+  .no-alcool-header {
+    margin-bottom: 13px;
+
+    align-items: center;
+  }
+
+  .no-alcool-kicker {
+    font-size: 10px;
+  }
+
+  .no-alcool-header h2 {
+    font-size: 20px;
+  }
+
+  .no-alcool-see-all {
+    font-size: 12px;
+
+    padding: 6px 8px;
+  }
+
+
+  /* 2 produtos por linha */
+
+  .no-alcool-list {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .no-alcool-card {
+    border-radius: 12px;
+  }
+
+  .no-alcool-image-wrapper {
+    padding: 10px;
+  }
+
+  .no-alcool-content {
+    padding: 10px 10px 12px;
+  }
+
+  .no-alcool-content h3 {
+    min-height: 34px;
+
+    font-size: 12.5px;
+  }
+
+  .no-alcool-unit {
+    margin-bottom: 5px;
+
+    font-size: 10px;
+  }
+
+  .no-alcool-price {
+    font-size: 16px;
+  }
+
+  .no-alcool-old-price {
+    font-size: 10px;
+  }
+
+  .no-alcool-add {
+    right: 8px;
+    bottom: 8px;
+
+    width: 34px;
+    height: 34px;
+  }
+
+  .no-alcool-add svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .no-alcool-promo {
+    top: 8px;
+    left: 8px;
+
+    padding: 4px 6px;
+
+    font-size: 9px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE PEQUENO
+===================================================== */
+
+@media (max-width: 360px) {
+
+  .no-alcool-list {
+    gap: 8px;
+  }
+
+  .no-alcool-content h3 {
+    font-size: 12px;
+  }
+
+  .no-alcool-price {
+    font-size: 15px;
+  }
+
+}

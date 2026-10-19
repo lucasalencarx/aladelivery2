@@ -1,0 +1,48 @@
+{
+  "name": "deliverybeer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "backend": "node backend/server.js",
+    "backend:dev": "node --watch backend/server.js",
+    "test:db": "node tests/database.mjs",
+    "test:ui": "vitest run",
+    "test": "npm run test:db && npm run test:ui && node --test tests/commerce.test.js",
+    "start": "node backend/server.js",
+    "start:backend": "node backend/server.js",
+    "dev:frontend": "vite --host"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "lucide-react": "^1.41.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-icons": "^5.7.0",
+    "react-router-dom": "^7.18.3"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.10",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "jsdom": "^30.1.3",
+    "oxlint": "^1.75.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "vitest": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

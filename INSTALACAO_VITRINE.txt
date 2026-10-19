@@ -1,0 +1,241 @@
+ALA DELIVERY — FRONT INTEGRADO AO BANCO
+
+PARA USAR
+1. Descompacte o projeto e mantenha suas variáveis de ambiente/configuração do Supabase.
+2. Execute sql/06-vitrine-publica.sql no SQL Editor do mesmo projeto Supabase.
+   A estrutura e os SQLs do admin entregues anteriormente precisam estar instalados.
+3. Na pasta do projeto: npm install, depois npm run dev.
+   Para publicação: npm run build e publique o conteúdo de dist.
+4. No admin, em Ofertas e Seções, crie/ative as seções, adicione seus produtos e
+   defina a ordem. Ative os produtos e informe estoque real em Produtos.
+
+COMO A VITRINE FUNCIONA
+A página inicial consulta a função storefront_catalog do Supabase. Ela retorna
+somente seções ativas e produtos ativos associados, na ordem salva pelo admin.
+Seções vazias ficam fora do menu/vitrine. O mesmo produto pode estar em mais de
+uma seção; a busca apresenta cada produto uma única vez.
+Sem seção com produtos ativos, a loja mostra cardápio em preparação — não usa
+produtos de demonstração. Produtos com estoque zero aparecem como indisponíveis.
+Produtos ativos sem seção ativa não aparecem na vitrine. Categorias continuam
+servindo para organizar os cadastros e identificar os produtos nos cards.
+
+O catálogo é atualizado ao entrar, ao voltar à janela, a cada 60 segundos enquanto
+ela está visível e pelo botão Atualizar catálogo. Alterações do admin aparecem no
+próximo carregamento; não é necessário alterar o React a cada seção criada.
+Se o banco falhar, a página mostra um aviso e permite tentar novamente.
+
+MAIORIDADE
+Antes de carregar a vitrine, a loja solicita confirmação de 18 anos ou mais.
+A resposta negativa mantém o acesso ao catálogo restrito. A confirmação positiva
+é lembrada na sessão da aba; atualizar a mesma aba não exige confirmar de novo.
+É uma autodeclaração, sem coleta de data de nascimento ou documento neste modal.
+A mensagem informa que um documento poderá ser solicitado na entrega.
+
+PRODUTOS E FOTOS
+Cards exibem nome, categoria, preço, desconto válido, unidade e disponibilidade.
+Clicar na foto/nome abre detalhes com imagem ampliada, descrição e seleção de
+quantidade. O botão do card adiciona diretamente uma unidade.
+Imagem ausente ou inválida recebe uma indicação discreta de imagem indisponível.
+As fotos continuam dentro de public/catalogo-zpedidos; o banco guarda image_url.
+As imagens existentes do projeto foram preservadas. Copie essa pasta ao publicar.
+
+CARRINHO
+Animação de abertura/fechamento, fundo desfocado, foco preso no diálogo, fechamento
+por X, Escape ou clique no fundo, e suporte à preferência de movimento reduzido.
+Adicionar um produto mostra um aviso; dentro dos detalhes/carrinho o retorno
+aparece no próprio diálogo. O carrinho respeita a quantidade em estoque.
+Os itens ficam guardados no navegador e são conferidos novamente ao carregar o
+catálogo. Preço promocional só é usado se positivo e menor que o preço normal.
+Subtotal calculado em centavos para reduzir diferenças de arredondamento.
+
+Antes de abrir o checkout, o sistema consulta o banco novamente e confere preço,
+estoque, disponibilidade e se a loja está aberta quando esse status está configurado.
+Se houver alteração, o carrinho é atualizado e pede revisão antes de continuar.
+A conferência pode ser cancelada fechando o carrinho. Essa etapa é só consulta:
+não cria pedido nem cobra. Validação definitiva e reserva de estoque devem ocorrer
+no backend do pedido, pois outra pessoa pode comprar o mesmo item simultaneamente.
+Contato, cadastro, endereço e pagamento agora usam o mesmo painel e visual do
+carrinho. Avançar troca somente a etapa; voltar preserva os dados digitados.
+O checkout é carregado quando o cliente vai finalizar e mantém a lógica existente.
+A seleção de preço usa a mesma regra do carrinho.
+
+BANCO E CONFIGURAÇÃO
+O novo SQL acrescenta somente a função de leitura storefront_catalog e a permissão
+de executá-la para visitantes e clientes autenticados. Não libera acesso público
+às tabelas privadas do admin nem retorna custo, clientes ou dados administrativos.
+IDs são retornados como texto, compatíveis com UUID e números.
+O horário da loja usa America/Sao_Paulo e o controle manual/automático já existente.
+O SQL não apaga dados, não importa novamente os 510 registros e pode ser reexecutado.
+Não executei alterações no seu banco remoto. Campos obrigatórios/nomes do schema
+precisam corresponder à estrutura utilizada pelo admin enviado.
+
+VERIFICAÇÃO
+Build TypeScript/Vite concluído. Testes de SQL em PostgreSQL isolado: ordem das
+seções/produtos, ativos/inativos, estoque zero, IDs numéricos, campos privados e horário.
+Testes de navegador: maioridade antes da consulta, recusa, busca, detalhes, aviso de
+adição, estoque, carrinho, Escape, persistência, atualização de preços, passagem para
+o checkout, falha/retry e desktop/mobile. Dados de teste não foram inseridos no projeto.
+
+ARQUIVOS PRINCIPAIS
+src/storefront: vitrine, cards, detalhes, confirmação de maioridade, avisos e animação.
+src/contexts/CartContext.jsx: carrinho e persistência.
+src/components/CartDrawer/CartDrawer.jsx: visual e conferência do carrinho.
+src/components/Header/Header.jsx: busca real e status do banco.
+sql/06-vitrine-publica.sql: leitura pública segura das seções.
+
+AJUSTES DA VERSÃO COMPACTA
+Bloco de introdução removido, espaçamentos menores e imagens contidas em caixas
+de tamanho padrão, sem cortar as embalagens. Seções têm rolagem horizontal nativa
+por toque, setas no desktop, arraste com mouse e navegação pelas teclas de direção.
+A busca continua exibindo uma grade dos resultados. Carrinho e checkout compartilham
+o mesmo diálogo animado, com visual uniforme para contato, entrega e pagamento.
+Não é necessário executar SQL adicional para estes ajustes.
+Build de produção e testes de navegador aprovados, incluindo ida/volta do checkout,
+preservação do telefone, setas horizontais e ausência de overflow na página mobile.
+
+CARDÁPIO / MARCAS / CURTIDAS
+Menu horizontal com ícones e indicador amarelo da seção selecionada. Produtos em
+duas fileiras com rolagem lateral: no celular, duas colunas completas e parte da
+terceira ficam visíveis. Fotos menores e coração para curtir cada produto.
+Curtidas são salvas neste navegador; não exigem conta nem alteram o banco.
+O selo Vai gelada aparece nas categorias cervejas, refrigerantes, águas, sucos
+e energéticos. Ajuste isChilled em src/storefront/sectionIcons.jsx se criar
+novas categorias ou mudar o modo de entrega de bebidas.
+Marcas que amamos usa marcas ativas do admin com produtos na vitrine; clicar
+na marca filtra seus produtos. Fotos/logos vêm dos campos cadastrados no admin.
+Execute sql/07-marcas-vitrine.sql no SQL Editor do Supabase para disponibilizar
+marcas ao front. Em instalação nova, o sql/06-vitrine-publica.sql já está atualizado.
+Nenhum comando apaga dados. Não executei alterações no banco remoto.
+A confirmação de maioridade usa a logomarca da loja e textos mais curtos.
+
+AJUSTE DAS FILEIRAS INDEPENDENTES
+Cada seção agora tem duas fileiras que deslizam separadamente, com toque, mouse,
+setas próprias e teclado. Deslizar uma fileira não move a outra. Cards preservados.
+Aviso de bebidas geladas integrado à linha de atualização, junto ao título da seção.
+Confirmação de maioridade em preto e amarelo, com logomarca, antes do catálogo.
+Não exige SQL adicional em relação à versão anterior.
+Build e testes de navegador aprovados, incluindo movimento independente das linhas.
+
+CORREÇÃO DO ARRASTE E DA MAIORIDADE
+Removido o contorno coletivo de foco das fileiras; mantido o acabamento dos cards.
+Arraste livre do mouse por qualquer parte do card, incluindo foto, texto e botões.
+Movimentar não abre detalhes, curte nem adiciona ao carrinho. Clique simples continua
+funcionando. Sem scroll snap: não há encaixe automático ao mover/soltar a linha.
+Fileiras continuam independentes, com swipe nativo no celular e controles de teclado.
+O bloco de maioridade da página principal foi removido. A confirmação permanece
+somente no modal de entrada em preto e amarelo, antes de carregar o catálogo.
+A confirmação é lembrada na sessão da aba. Não há SQL adicional.
+Build e testes de navegador aprovados, incluindo arraste de 40 px sem salto,
+ausência de acionamento dos botões durante arraste e clique normal para adicionar.
+
+TOPO ESTÁVEL, SWIPE E PWA
+Faixa e header agora compartilham um topo sticky em fluxo normal. Removidos os
+backdrop-filter do topo para reduzir artefatos/deslocamentos de composição no Safari.
+A altura real do topo é medida para rolagem até as seções e busca, sem sobreposição.
+No desktop, logo, header, banners e catálogo têm a mesma largura centralizada.
+Fileiras que cabem inteiras ficam centralizadas no desktop. Mobile mantém os cards.
+Swipe horizontal usa Pointer Events com movimento direto e leve inércia ao soltar.
+É possível ir e voltar no mesmo gesto, sem selecionar o card. Rolagem vertical e
+pinça para zoom continuam disponíveis. A fileira vizinha não se move junto.
+Busca atualiza ao digitar; Enter e botão Buscar posicionam os resultados.
+Campos da loja e checkout usam fonte de 16 px para evitar zoom automático do iOS.
+
+PWA: manifest.webmanifest, ícones, Apple touch icon, service worker e tela offline.
+Usar como app aparece no rodapé quando o site não está em modo app. Nos navegadores
+compatíveis, usa o prompt de instalação; no iPhone mostra Compartilhar > Adicionar
+à Tela de Início. Quando instalado, o botão fica oculto.
+Publique o conteúdo de dist na raiz do domínio com HTTPS. Em npm run dev o service
+worker não é registrado para evitar cache interferindo no desenvolvimento.
+HTTP em IP de rede (ex.: 10.0.0.103:5173) não habilita service worker/instalação PWA.
+Localhost é permitido para teste no próprio computador.
+Configure o servidor para servir /sw.js como JavaScript e /manifest.webmanifest
+como manifesto JSON. Não reescreva esses arquivos para index.html; SPA precisa
+de fallback index.html para rotas, mas arquivos existentes devem ser servidos.
+O service worker armazena só arquivos estáticos; não guarda clientes, banco, pedidos,
+pagamentos ou páginas do admin. Sem conexão, informa que é preciso reconectar para
+consultar preços/estoque e comprar. Não envia pedidos offline.
+Em novas alterações no worker, incremente CACHE em public/sw.js.
+Não há SQL adicional. Build e testes em Chromium desktop/mobile aprovados:
+swipe nos dois sentidos, independência das linhas, alinhamento do header, busca,
+fonte dos inputs, opção de instalação, service worker e retorno offline/online.
+A correção visual do Safari foi baseada no anexo; não houve teste em iPhone físico.
+
+CORREÇÃO FINAL DO SWIPE
+No celular, o dedo usa somente a rolagem nativa do navegador. Removidos captura
+do toque, inércia artificial e interferência manual no deslocamento. Sem snap.
+Fileiras continuam independentes. O mouse mantém arraste no desktop.
+Somente ProductRail.jsx e as regras do swipe em storefront.css foram ajustados.
+Build e testes de swipe, independência das linhas e cliques aprovados em Chromium.
+
+OTIMIZAÇÃO DA ROLAGEM VERTICAL
+Removido backdrop-filter da navegação inferior e controles do banner no mobile.
+Removidas transformações/efeitos hover das imagens no toque. Cards usam overflow
+clip, mantendo bordas arredondadas sem criar áreas internas de scroll.
+Indicadores da fileira não renderizam novamente todos os cards a cada pixel de
+movimento. Setas só atualizam quando o estado dos limites muda.
+Banner não usa mais touchmove para acompanhar cada frame do dedo; detecta
+swipe pelos eventos de início/fim, preservando rolagem vertical nativa.
+Swipe lateral nativo e fileiras independentes preservados. Build aprovado.
+Testes Chromium: carrinho, cliques, swipe lateral, independência das fileiras,
+rolagem por wheel em viewport mobile e estabilidade do topo. Não foi medida
+fluidez em iPhone físico. Os testes sintéticos de toque vertical neste ambiente
+não reproduziram a rolagem, embora a rolagem por wheel e programática funcione.
+Não há SQL novo.
+
+PADRONIZAÇÃO DA VITRINE E MODAL CINZA
+Todas as seções, inclusive Sem álcool, usam ProductRail: duas fileiras independentes
+com o mesmo card e swipe lateral nativo. Busca e filtro por marca também usam
+ProductRail, eliminando a antiga grade estática desses resultados. Produtos exibidos
+continuam sendo os ativos vinculados às seções ativas do admin. Se uma seção tiver
+apenas um produto, só haverá uma fileira; adicionar mais produtos amplia a vitrine.
+
+Rolagem vertical: #root da loja usa fluxo de bloco, sem contêiner flex na raiz.
+Documento é responsável pelo scroll vertical, com retorno elástico das bordas
+desativado nos navegadores que suportam overscroll-behavior. Topo e cards mantidos.
+Seções usam contenção de pintura para limitar redesenhos; swipe lateral preservado.
+Testes Chromium mobile: Sem álcool com duas linhas, setas laterais independentes,
+rolagem vertical por wheel para cima/baixo e topo estável. Fluidez real no iPhone
+não foi medida; confirmar no aparelho. Não foi acrescentado scroll vertical manual.
+
+Modal em cinza suave, letras pretas e detalhes amarelos. Confirmar entra no catálogo.
+Não direciona para /acesso-restrito com explicação e link oficial do artigo 243 do ECA:
+https://www.planalto.gov.br/ccivil_03/leis/l8069.htm#art243
+O texto foi conferido em fonte oficial; não expõe catálogo antes da confirmação.
+A nova rota precisa do mesmo fallback SPA para index.html já usado pelo React.
+Não há SQL adicional. Build e testes de navegação/recusa de idade aprovados.
+
+DESKTOP 80%, PWA NO TOPO E SUGESTÕES
+Header, catálogo/banners, rodapé e conteúdo da navegação inferior usam 80% da
+janela, centralizados no desktop (>768 px). Mobile mantém a largura anterior.
+Usar como app foi movido para perto do topo, antes do menu de seções.
+Busca mostra até seis sugestões do catálogo real, com foto, categoria e preço.
+Ao selecionar, fecha as sugestões, tira o foco do campo para fechar o teclado
+e abre os detalhes. Usa VisualViewport para limitar a lista ao espaço visível
+e esperar o teclado recolher (com limite de espera) antes de abrir o produto.
+Setas do teclado selecionam sugestões, Enter abre e Escape fecha. Limpar busca
+e Ver todos os resultados disponíveis. Não rola a página ao digitar a primeira
+letra. A navegação inferior fica oculta no mobile enquanto a busca está aberta.
+Fonte 16 px nos campos preservada, sem bloquear o zoom manual do usuário.
+Testes Chromium: sugestões por clique e teclado, foco removido antes do produto,
+limpar, ausência de resultado, PWA no topo e alinhamento exato a 80% no desktop.
+Não houve teste do teclado físico/Chrome no iPhone.
+
+CHROME NO IPHONE
+Se o Safari funciona normalmente, compare o Chrome em uma aba anônima primeiro.
+Cache pode conter arquivos antigos, mas não confirma a causa de lag. Para testar,
+no Chrome: Mais > Excluir dados de navegação > Dados de navegação > selecione
+apenas Imagens e arquivos armazenados em cache; confirme e recarregue a página.
+Não é necessário apagar cookies, histórico, senhas ou dados do site para esse teste.
+Guia oficial: https://support.google.com/chrome/answer/2392709?hl=pt-BR&co=GENIE.Platform%3DiOS
+Build aprovado. Sem SQL adicional.
+
+BOTÃO DE INSTALAÇÃO REMOVIDO
+Usar como app foi removido da interface, incluindo o espaço acima do menu.
+No desktop, cada card mede 186 px com 11 px de intervalo. O catálogo usa
+80% da largura da janela. Duas fileiras independentes distribuem os produtos.
+Em 1366/1440 px: cinco cards inteiros por fileira (10 produtos nas duas).
+Em 1920 px: sete cards inteiros por fileira (14 produtos nas duas).
+Não há quantidade mínima obrigatória; fileiras menores ficam centralizadas.
+Mais produtos ficam disponíveis na rolagem lateral. Para criar mais conteúdo
+para swipe, use 12 itens por seção em notebooks ou 16 em telas Full HD.
+Build aprovado. Sem SQL adicional.
