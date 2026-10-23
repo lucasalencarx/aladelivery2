@@ -29,6 +29,10 @@ export function installCouriers(router,{db,run,safe,admin,publicOrder,trackingUR
   const result=await run(db.rpc('shop_courier_action',{p_id:req.params.id,p_auth:req.courierAuth,p_action:action,p_code:action==='finish'?String(req.body.code):null}));
   res.json({order:publicOrder(Array.isArray(result)?result[0]:result)});
  }));
+ router.post('/courier/orders/:id/tracking-stop',courier,safe(async(req,res)=>{
+  await run(db.rpc('shop_courier_tracking_stop',{p_id:req.params.id,p_auth:req.courierAuth}));
+  res.json({success:true});
+ }));
  router.post('/courier/orders/:id/position',courier,safe(async(req,res)=>{
   const {lat,lng,accuracy}=req.body;
   if(!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180||!Number.isFinite(accuracy)||accuracy<0)return res.status(422).json({message:'Localização inválida.'});

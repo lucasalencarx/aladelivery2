@@ -127,6 +127,7 @@ console.log('OK: migrações 08–14; Pix; histórico; estoque; horários; mensa
 // Entregador: isolamento, código de entrega e proximidade idempotente.
 await db.exec('ALTER TABLE delivery_couriers ADD COLUMN active boolean DEFAULT true');
 const courierMigration=await readFile(new URL('../sql/15-entregadores-operacao.sql',import.meta.url),'utf8');await db.exec(courierMigration);await db.exec(courierMigration);
+const trackingMigration=await readFile(new URL('../sql/18-rastreamento-ao-vivo.sql',import.meta.url),'utf8');await db.exec(trackingMigration);await db.exec(trackingMigration);
 const courierId=randomUUID(),courierAuth=randomUUID();await db.query('INSERT INTO delivery_couriers(id,auth_user_id) VALUES($1,$2)',[courierId,courierAuth]);
 await db.query('UPDATE shop_orders SET courier_id=$2 WHERE id=$1',[opsOrder.id,courierId]);
 await assert.rejects(db.query("SELECT shop_courier_action($1,$2,'start',NULL)",[opsOrder.id,randomUUID()]),/atribuída/);
@@ -138,14 +139,27 @@ assert.equal((await db.query('SELECT order_status FROM shop_orders WHERE id=$1',
 await db.query('UPDATE shop_orders SET delivery_lat=-19.008,delivery_lng=-57.653 WHERE id=$1',[opsOrder.id]);
 await assert.rejects(db.query('SELECT shop_courier_position($1,$2,-19.008,-57.653,20)',[opsOrder.id,randomUUID()]),/atribuída/);
 assert.equal((await db.query('SELECT shop_courier_position($1,$2,-19.008,-57.653,20) near',[opsOrder.id,courierAuth])).rows[0].near,true);
+assert.equal((await db.query('SELECT courier_accuracy FROM shop_orders WHERE id=$1',[opsOrder.id])).rows[0].courier_accuracy,20);
+await assert.rejects(db.query('SELECT shop_courier_tracking_stop($1,$2)',[opsOrder.id,randomUUID()]),/atribuída/);
+await db.query('SELECT shop_courier_tracking_stop($1,$2)',[opsOrder.id,courierAuth]);
+assert.equal((await db.query('SELECT courier_lat FROM shop_orders WHERE id=$1',[opsOrder.id])).rows[0].courier_lat,null);
+await db.query('SELECT shop_courier_position($1,$2,-19.009,-57.654,25)',[opsOrder.id,courierAuth]);
+await assert.rejects(db.query("SELECT shop_courier_position($1,$2,'NaN'::float8,-57,25)",[opsOrder.id,courierAuth]),/inválidas/);
+await assert.rejects(db.query("SELECT shop_courier_position($1,$2,-19,-57,'Infinity'::float8)",[opsOrder.id,courierAuth]),/inválidas/);
+await db.query('UPDATE shop_orders SET courier_id=NULL WHERE id=$1',[opsOrder.id]);
+assert.equal((await db.query('SELECT courier_lat FROM shop_orders WHERE id=$1',[opsOrder.id])).rows[0].courier_lat,null);
+await db.query('UPDATE shop_orders SET courier_id=$2 WHERE id=$1',[opsOrder.id,courierId]);
+await db.query('SELECT shop_courier_position($1,$2,-19.008,-57.653,20)',[opsOrder.id,courierAuth]);
 await db.query("SELECT shop_courier_action($1,$2,'nearby',NULL)",[opsOrder.id,courierAuth]);
-assert.equal((await db.query("SELECT count(*)::int n FROM shop_messages WHERE order_id=$1 AND body LIKE 'Seu pedido já está chegando%'",[opsOrder.id])).rows[0].n,1);
+assert.equal((await db.query("SELECT count(*)::int n FROM shop_messages WHERE order_id=$1 AND body LIKE 'Seu pedido já está chegando%'",[opsOrder.id])).rows[0].n,2);
 await assert.rejects(db.query("SELECT shop_courier_action($1,$2,'finish','0000')",[opsOrder.id,courierAuth]),/ódigo/);
 await db.query('UPDATE delivery_couriers SET active=false WHERE id=$1',[courierId]);
 await assert.rejects(db.query("SELECT shop_courier_action($1,$2,'finish','9999')",[opsOrder.id,courierAuth]),/atribuída/);
 await db.query('UPDATE delivery_couriers SET active=true WHERE id=$1',[courierId]);
 await db.query("SELECT shop_courier_action($1,$2,'finish','9999')",[opsOrder.id,courierAuth]);
 assert.equal((await db.query('SELECT order_status FROM shop_orders WHERE id=$1',[opsOrder.id])).rows[0].order_status,'delivered');
+assert.equal((await db.query('SELECT courier_location_at FROM shop_orders WHERE id=$1',[opsOrder.id])).rows[0].courier_location_at,null);
+await assert.rejects(db.query('SELECT shop_courier_position($1,$2,-19,-57,20)',[opsOrder.id,courierAuth]),/em rota/);
 await db.exec('SET ROLE authenticated');await assert.rejects(db.query("SELECT shop_courier_action($1,$2,'finish','9999')",[opsOrder.id,courierAuth]),/permission denied/);await db.exec('RESET ROLE');
 const adminOrders=await rpc('shop_list_orders',["'all'","'all'",'1',"''","'all'",'NULL']);assert.ok(adminOrders.orders.every(o=>o.payment_method!=='pix'||o.payment_status!=='pending'));
 console.log('OK: migração 15; acesso atribuído; PIN; GPS; aviso único; Pix pendente oculto do admin.');

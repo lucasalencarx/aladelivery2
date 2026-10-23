@@ -1,4 +1,5 @@
 import {installCustomerAccounts} from './customerAccounts.js';
+import {installTracking} from './tracking.js';
 import {installCouriers} from './couriers.js';
 import { Router } from 'express';
 import {startReconciliation} from './reconciliation.js';
@@ -23,7 +24,7 @@ export function commerceRouter(){
   if(!/^\d{10,11}$/.test(phone)){if(required)throw Error('Utilize um telefone brasileiro com DDD.');return null;}return phone;
  }
  const customer=safe(async(req,res,next)=>{try{req.customerPhone=await verifiedPhone(req,true);next();}catch(e){res.status(401).json({message:e.message});}});
- const publicOrder=o=>{const {access_token,request_key,customer_document,pix_data,...rest}=o;return {...rest,has_saved_document:/^\d{11}$/.test(customer_document||'')};};
+ const publicOrder=o=>{const {access_token,request_key,customer_document,pix_data,courier_lat,courier_lng,courier_accuracy,courier_location_at,...rest}=o;return {...rest,has_saved_document:/^\d{11}$/.test(customer_document||'')};};
 
  function trackingURL(o,req){
   const configured=process.env.PUBLIC_STOREFRONT_URL||process.env.FRONTEND_URL||'http://localhost:5173';
@@ -33,6 +34,7 @@ export function commerceRouter(){
  installCustomerAccounts(router,{db,run,safe});
  router.get('/admin/financial-report',admin,safe(async(req,res)=>res.json(await run(db.rpc('shop_financial_report',{p_start:req.query.start,p_end:req.query.end,p_grain:req.query.grain||'day'})))));
  installCouriers(router,{db,run,safe,admin,publicOrder,trackingURL});
+ installTracking(router,{db,run,safe,access,admin});
  router.get('/admin/orders/:id/tracking',admin,safe(async(req,res)=>{const o=await run(db.from('shop_orders').select('id,protocol,access_token').eq('id',req.params.id).single());res.json({tracking_url:trackingURL(o,req)});}));
  async function gateway(path,options={}){if(!process.env.PAGARME_SECRET_KEY)throw Error('Configure PAGARME_SECRET_KEY no servidor.');const response=await fetch(`https://api.pagar.me/core/v5${path}`,{...options,signal:AbortSignal.timeout(20000),headers:{Authorization:`Basic ${Buffer.from(process.env.PAGARME_SECRET_KEY+':').toString('base64')}`,'Content-Type':'application/json',...options.headers}});const data=await response.json();if(!response.ok){console.error('Pagar.me HTTP',response.status);throw Error('O Pagar.me não concluiu a operação. Tente novamente ou contate a loja.');}return data;}
  const refreshing=new Map();
