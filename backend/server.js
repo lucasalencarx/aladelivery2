@@ -33,7 +33,7 @@ export function createApp(){
  return app;
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
- const port=Number(process.env.BACKEND_PORT||3001);
+ const port=Number(process.env.PORT||process.env.BACKEND_PORT||3001);
  const server=createApp().listen(port,'0.0.0.0',()=>console.log(`Backend iniciado na porta ${port}. Diagnóstico: http://localhost:${port}/api/health`));
  server.on('error',err=>{console.error(err.code==='EADDRINUSE'?`A porta ${port} já está em uso. Encerre o backend antigo antes de executar npm start.`:err.message);process.exitCode=1;});
 }
